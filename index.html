@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>blush</title>
+  <title>BLUSH – Kevin Abstract</title>
 
-  <!-- Google Font: Anton -->
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <!-- Google Font: Roboto (Black, Bold, Regular) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet" />
 
   <!-- Meta Description and SEO -->
   <meta name="description" content="BLUSH by Kevin Abstract – Texas Pop for the summer. Explore music, visuals, and more." />
@@ -40,22 +40,40 @@
 
     body, html {
       background: var(--red);
-      font-family: 'Anton', sans-serif;
+      font-family: 'Roboto', sans-serif;
       color: white;
       overflow-x: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Text variants */
+    .font-black {
+      font-weight: 900; /* Roboto Black */
+    }
+
+    .font-bold {
+      font-weight: 700; /* Roboto Bold */
+    }
+
+    .font-regular {
+      font-weight: 400; /* Roboto Regular */
     }
 
     h1, h2, h3 {
       color: var(--blue);
-      letter-spacing: -0.16em;
+      letter-spacing: 0.05em;
       text-align: center;
+      font-weight: 700; /* Bold */
+      margin-bottom: 0.5em;
     }
 
     p {
       text-align: center;
-      letter-spacing: -0.08em;
+      letter-spacing: 0.03em;
       margin: 1em;
       font-size: 1.2rem;
+      font-weight: 400;
     }
 
     /* Loader */
@@ -79,18 +97,28 @@
       background-size: cover;
       background-position: center;
       animation: flicker 4s steps(1, end) infinite;
+      z-index: 0;
     }
 
     .loader-text {
       z-index: 10;
-      font-size: 4rem;
+      font-size: 5rem;
       color: var(--blue);
+      font-weight: 900; /* Roboto Black */
+      letter-spacing: 0.15em;
+      animation: pulse 3.5s ease-in-out infinite;
+      user-select: none;
     }
 
     .loader-sub {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: white;
       z-index: 10;
+      font-weight: 700; /* Bold */
+      letter-spacing: 0.1em;
+      animation: pulse 3.5s ease-in-out infinite;
+      user-select: none;
+      margin-top: 0.2em;
     }
 
     @keyframes flicker {
@@ -104,6 +132,11 @@
       to { opacity: 0; visibility: hidden; }
     }
 
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
     /* Header */
     .header {
       font-size: 5rem;
@@ -113,7 +146,10 @@
       transform: translate(-50%, -50%);
       z-index: 1000;
       color: var(--blue);
+      font-weight: 900; /* Roboto Black */
+      letter-spacing: 0.15em;
       transition: all 1s ease 4s;
+      user-select: none;
     }
 
     body.loaded .header {
@@ -121,6 +157,7 @@
       left: 1rem;
       font-size: 2rem;
       transform: none;
+      letter-spacing: 0.1em;
     }
 
     /* Main content */
@@ -141,13 +178,14 @@
       margin: 1em auto;
       display: block;
       transition: transform 0.4s;
+      cursor: pointer;
     }
 
     .gallery img:hover {
       transform: perspective(600px) rotateY(10deg) scale(1.05);
     }
 
-    /* Menu Toggle */
+    /* Menu Toggle (bear) */
     .menu-toggle {
       position: fixed;
       bottom: 1em;
@@ -155,27 +193,36 @@
       transform: translateX(-50%);
       cursor: pointer;
       z-index: 10001;
+      user-select: none;
     }
 
     .menu-toggle img {
       width: 50px;
-      filter: hue-rotate(180deg) drop-shadow(0 0 4px black);
-      animation: wander 5s infinite alternate ease-in-out;
+      filter: brightness(0) invert(1) drop-shadow(0 0 40px #7abaff);
+      animation: wander 5s infinite alternate ease-in-out, hop 1.5s infinite ease-in-out;
+      transition: filter 0.3s ease;
     }
 
     .menu-toggle.open::after {
       content: '★';
-      color: red;
+      color: var(--red);
       position: absolute;
       top: 0;
       left: 0;
       font-size: 2rem;
       transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
     }
 
     @keyframes wander {
       0% { transform: translateX(-50%) translateY(0); }
       100% { transform: translateX(-40%) translateY(0); }
+    }
+
+    @keyframes hop {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
     /* Mobile Menu */
@@ -192,6 +239,8 @@
       padding: 2em;
       transition: bottom 0.4s ease-in-out;
       z-index: 9998;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .mobile-menu.open {
@@ -203,7 +252,13 @@
       margin: 1em 0;
       color: white;
       text-decoration: none;
-      text-shadow: 1px 1px black;
+      font-weight: 700;
+      user-select: none;
+      transition: color 0.3s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--blue);
     }
 
     @media(min-width: 800px) {
@@ -223,20 +278,20 @@
 
   <!-- Loader -->
   <div class="loader">
-    <div class="loader-text">blush</div>
-    <div class="loader-sub">JUNE 2025</div>
+    <div class="loader-text font-black">blush</div>
+    <div class="loader-sub font-bold">JUNE 2025</div>
     <div class="loader-image"></div>
   </div>
 
   <!-- Header -->
-  <div class="header">blush</div>
+  <div class="header font-black">blush</div>
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="menu">
-    <a href="#">Home</a>
-    <a href="#">Tour</a>
-    <a href="#">Music</a>
-    <a href="#">Contact</a>
+    <a href="#" class="font-bold">Home</a>
+    <a href="#" class="font-bold">Tour</a>
+    <a href="#" class="font-bold">Music</a>
+    <a href="#" class="font-bold">Contact</a>
   </div>
 
   <!-- Menu Toggle -->
