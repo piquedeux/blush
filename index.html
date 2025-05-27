@@ -84,6 +84,8 @@
     .loader-text {
       z-index: 10;
       font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -0.2em;
       color: var(--blue);
     }
 
@@ -107,9 +109,11 @@
     /* Header */
     .header {
       font-size: 5rem;
+      letter-spacing: -0.2em;
       position: fixed;
       top: 40%;
       left: 50%;
+      font-weight: 900;
       transform: translate(-50%, -50%);
       z-index: 1000;
       color: var(--blue);
@@ -157,9 +161,9 @@
       z-index: 10001;
     }
 
-    .menu-toggle img {
+    .menu-toggle svg {
       width: 50px;
-      filter: hue-rotate(180deg) drop-shadow(0 0 4px black);
+      color: white;
       animation: wander 5s infinite alternate ease-in-out;
     }
 
@@ -184,7 +188,7 @@
       bottom: -100%;
       left: 0;
       width: 100%;
-      background: url('https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg') center/cover no-repeat;
+      background: var(--red);
       color: white;
       display: flex;
       flex-direction: column;
