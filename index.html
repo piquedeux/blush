@@ -5,27 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BLUSH – Kevin Abstract</title>
 
-  <!-- Google Font: Roboto (Black, Bold, Regular) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <!-- Meta Description and SEO -->
+  <!-- Meta -->
   <meta name="description" content="BLUSH by Kevin Abstract – Texas Pop for the summer. Explore music, visuals, and more." />
   <link rel="icon" href="Favicon.jpg" type="image/jpeg" />
-
-  <!-- Open Graph for social -->
   <meta property="og:title" content="BLUSH by Kevin Abstract" />
   <meta property="og:description" content="Texas Pop for the summer. Dive into the sonic and visual world of Kevin Abstract." />
   <meta property="og:image" content="FAA91DFD-A3F8-4EE0-9A40-B3E161E4EC37.png" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="BLUSH by Kevin Abstract" />
   <meta name="twitter:description" content="Texas Pop for the summer." />
   <meta name="twitter:image" content="FAA91DFD-A3F8-4EE0-9A40-B3E161E4EC37.png" />
 
-  <!-- Styles -->
   <style>
     :root {
       --blue: #3D8BF2;
@@ -38,39 +31,28 @@
       padding: 0;
     }
 
-    body, html {
+    html, body {
       background: var(--red);
       font-family: 'Roboto', sans-serif;
-      color: white;
       overflow-x: hidden;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Text variants */
-    .font-black {
-      font-weight: 900; /* Roboto Black */
-    }
-
-    .font-bold {
-      font-weight: 700; /* Roboto Bold */
-    }
-
-    .font-regular {
-      font-weight: 400; /* Roboto Regular */
+      color: black;
     }
 
     h1, h2, h3 {
-      color: var(--blue);
-      letter-spacing: 0.05em;
       text-align: center;
-      font-weight: 700; /* Bold */
-      margin-bottom: 0.5em;
+      text-transform: lowercase;
+      letter-spacing: -0.16em;
+      font-weight: 900;
+    }
+
+    h3 {
+      text-transform: lowercase;
+      letter-spacing: -1.5em;
     }
 
     p {
       text-align: center;
-      letter-spacing: 0.03em;
+      letter-spacing: -0.08em;
       margin: 1em;
       font-size: 1.2rem;
       font-weight: 400;
@@ -87,7 +69,7 @@
       align-items: center;
       justify-content: center;
       z-index: 9999;
-      animation: fadeOut 3.5s ease-out 4s forwards;
+      animation: fadeOut 3.5s ease-out 4.5s forwards;
     }
 
     .loader-image {
@@ -96,29 +78,28 @@
       height: 100%;
       background-size: cover;
       background-position: center;
-      animation: flicker 4s steps(1, end) infinite;
-      z-index: 0;
+      animation: flicker 1s steps(1) 4;
     }
 
     .loader-text {
-      z-index: 10;
-      font-size: 5rem;
+      font-size: 4rem;
       color: var(--blue);
-      font-weight: 900; /* Roboto Black */
-      letter-spacing: 0.15em;
-      animation: pulse 3.5s ease-in-out infinite;
-      user-select: none;
+      text-transform: lowercase;
+      letter-spacing: -2em;
+      font-weight: 900;
+      opacity: 0;
+      animation: showBlush 0.5s ease-in 3.5s forwards;
+      z-index: 10;
     }
 
     .loader-sub {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: white;
+      font-weight: 700;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in 3.8s forwards;
       z-index: 10;
-      font-weight: 700; /* Bold */
-      letter-spacing: 0.1em;
-      animation: pulse 3.5s ease-in-out infinite;
-      user-select: none;
-      margin-top: 0.2em;
+      letter-spacing: normal;
     }
 
     @keyframes flicker {
@@ -132,9 +113,12 @@
       to { opacity: 0; visibility: hidden; }
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
+    @keyframes showBlush {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     /* Header */
@@ -146,10 +130,10 @@
       transform: translate(-50%, -50%);
       z-index: 1000;
       color: var(--blue);
-      font-weight: 900; /* Roboto Black */
-      letter-spacing: 0.15em;
-      transition: all 1s ease 4s;
-      user-select: none;
+      font-weight: 900;
+      transition: all 1s ease 4.5s;
+      text-transform: lowercase;
+      letter-spacing: -2em;
     }
 
     body.loaded .header {
@@ -157,19 +141,14 @@
       left: 1rem;
       font-size: 2rem;
       transform: none;
-      letter-spacing: 0.1em;
     }
 
     /* Main content */
     .main {
       padding-top: 6rem;
       opacity: 0;
-      animation: fadeIn 1s ease-in 4.2s forwards;
+      animation: fadeIn 1s ease-in 4.7s forwards;
       text-align: center;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
     }
 
     .gallery img {
@@ -178,14 +157,13 @@
       margin: 1em auto;
       display: block;
       transition: transform 0.4s;
-      cursor: pointer;
     }
 
     .gallery img:hover {
       transform: perspective(600px) rotateY(10deg) scale(1.05);
     }
 
-    /* Menu Toggle (bear) */
+    /* Menu Toggle */
     .menu-toggle {
       position: fixed;
       bottom: 1em;
@@ -193,36 +171,21 @@
       transform: translateX(-50%);
       cursor: pointer;
       z-index: 10001;
-      user-select: none;
     }
 
     .menu-toggle img {
-      width: 50px;
+      width: 80px;
       filter: brightness(0) invert(1) drop-shadow(0 0 40px #7abaff);
-      animation: wander 5s infinite alternate ease-in-out, hop 1.5s infinite ease-in-out;
-      transition: filter 0.3s ease;
     }
 
     .menu-toggle.open::after {
       content: '★';
-      color: var(--red);
+      color: red;
       position: absolute;
-      top: 0;
-      left: 0;
       font-size: 2rem;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      pointer-events: none;
-      user-select: none;
-    }
-
-    @keyframes wander {
-      0% { transform: translateX(-50%) translateY(0); }
-      100% { transform: translateX(-40%) translateY(0); }
-    }
-
-    @keyframes hop {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
     }
 
     /* Mobile Menu */
@@ -231,16 +194,13 @@
       bottom: -100%;
       left: 0;
       width: 100%;
-      background: url('https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg') center/cover no-repeat;
-      color: white;
+      background: var(--red);
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 2em;
       transition: bottom 0.4s ease-in-out;
       z-index: 9998;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
 
     .mobile-menu.open {
@@ -250,15 +210,9 @@
     .mobile-menu a {
       font-size: 1.4rem;
       margin: 1em 0;
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-      user-select: none;
-      transition: color 0.3s;
-    }
-
-    .mobile-menu a:hover {
       color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
     }
 
     @media(min-width: 800px) {
@@ -278,20 +232,20 @@
 
   <!-- Loader -->
   <div class="loader">
-    <div class="loader-text font-black">blush</div>
-    <div class="loader-sub font-bold">JUNE 2025</div>
+    <div class="loader-text">blush</div>
+    <div class="loader-sub">JUNE 2025</div>
     <div class="loader-image"></div>
   </div>
 
   <!-- Header -->
-  <div class="header font-black">blush</div>
+  <div class="header">blush</div>
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="menu">
-    <a href="#" class="font-bold">Home</a>
-    <a href="#" class="font-bold">Tour</a>
-    <a href="#" class="font-bold">Music</a>
-    <a href="#" class="font-bold">Contact</a>
+    <a href="#">Home</a>
+    <a href="#">Tour</a>
+    <a href="#">Music</a>
+    <a href="#">Contact</a>
   </div>
 
   <!-- Menu Toggle -->
@@ -302,8 +256,8 @@
   <!-- Main Content -->
   <div class="main">
     <h2>KEVIN ABSTRACT</h2>
-    <h3>SUMMER</h3>
-    <p>Genre: TEXAS POP</p>
+    <h3>summer 2025</h3>
+    <p><strong>Genre:</strong> Kevin Abstract’s new sonic chapter embraces warmth, nostalgia, and Texas pride. Experience his bold take on pop this season.</p>
     <div class="gallery">
       <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Promo 1" />
       <img src="https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg" alt="Promo 2" />
@@ -321,6 +275,5 @@
       document.getElementById('toggle').classList.toggle('open');
     }
   </script>
-
 </body>
 </html>
