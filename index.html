@@ -19,6 +19,7 @@
   <meta name="twitter:description" content="Texas Pop for the summer." />
   <meta name="twitter:image" content="FAA91DFD-A3F8-4EE0-9A40-B3E161E4EC37.png" />
 
+
   <style>
     :root {
       --blue: #3D8BF2;
@@ -26,36 +27,16 @@
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    html, body {
-      background: var(--red);
+    body {
       font-family: 'Roboto', sans-serif;
-      overflow-x: hidden;
+      background: var(--red);
       color: black;
-    }
-
-    h1, h2, h3 {
-      text-align: center;
-      text-transform: lowercase;
-      letter-spacing: -0.16em;
-      font-weight: 900;
-    }
-
-    h3 {
-      text-transform: lowercase;
-      letter-spacing: -0.15em;
-    }
-
-    p {
-      text-align: center;
-      letter-spacing: -0.08em;
-      margin: 1em;
-      font-size: 1.2rem;
-      font-weight: 400;
+      overflow-x: hidden;
     }
 
     /* Loader */
@@ -64,167 +45,169 @@
       top: 0; left: 0;
       width: 100vw; height: 100vh;
       background: var(--red);
+      z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      animation: fadeOut 3.5s ease-out 4.5s forwards;
+      animation: fadeOut 1s ease-out 5s forwards;
     }
 
-    .loader-image {
+    .loader .blush {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 900;
+      font-size: 4rem;
+      color: black;
+      letter-spacing: -2em;
+      animation: disappear 1s ease-in-out 1s forwards;
+    }
+
+    @keyframes disappear {
+      to { opacity: 0; transform: scale(0.8); }
+    }
+
+    .loader .images {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      animation: flicker 1s steps(1) 4;
-    }
-
-    .loader-text {
-      font-size: 4rem;
-      color: var(--blue);
-      text-transform: lowercase;
-      letter-spacing: -0.2em;
-      font-weight: 900;
-      opacity: 0;
-      animation: showBlush 0.5s ease-in 3.5s forwards;
-      z-index: 10;
-    }
-
-    .loader-sub {
-      font-size: 1.5rem;
-      color: white;
-      font-weight: 700;
-      opacity: 0;
-      animation: fadeIn 0.5s ease-in 3.8s forwards;
-      z-index: 10;
-      letter-spacing: normal;
+      animation: flicker 2s steps(1) 1 1.5s forwards;
     }
 
     @keyframes flicker {
       0% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
       33% { background-image: url('https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg'); }
       66% { background-image: url('https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'); }
-      100% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
+      100% { background-image: none; }
+    }
+
+    .loader .final {
+      opacity: 0;
+      animation: appear 1s ease-in 3.5s forwards;
+      text-align: center;
+    }
+
+    @keyframes appear {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .loader .logo {
+      font-weight: 900;
+      font-size: 4rem;
+      color: black;
+    }
+
+    .loader .subtext {
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: black;
+      letter-spacing: 0;
     }
 
     @keyframes fadeOut {
       to { opacity: 0; visibility: hidden; }
     }
 
-    @keyframes showBlush {
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* Header */
-    .header {
-      font-size: 5rem;
+    header {
       position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      color: var(--blue);
-      font-weight: 900;
-      transition: all 1s ease 4.5s;
-      text-transform: lowercase;
-      letter-spacing: -2em;
-    }
-
-    body.loaded .header {
       top: 1rem;
       left: 1rem;
       font-size: 2rem;
-      transform: none;
+      font-weight: 900;
+      color: black;
+      z-index: 100;
+      transform: scale(0);
+      animation: scaleDown 0.8s ease-out 5.2s forwards;
     }
 
-    /* Main content */
-    .main {
-      padding-top: 6rem;
-      opacity: 0;
-      animation: fadeIn 1s ease-in 4.7s forwards;
+    @keyframes scaleDown {
+      to { transform: scale(1); }
+    }
+
+    main {
+      margin-top: 8rem;
       text-align: center;
+      padding: 2rem;
+    }
+
+    h2 {
+      font-weight: 700;
+    }
+
+    h3 {
+      font-weight: 400;
+      letter-spacing: -1.5em;
+      text-transform: lowercase;
+    }
+
+    .genre {
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin: 1.5rem 0;
+      color: black;
+      max-width: 600px;
+      margin-inline: auto;
     }
 
     .gallery img {
       width: 90%;
       max-width: 400px;
-      margin: 1em auto;
+      margin: 1rem auto;
       display: block;
-      transition: transform 0.4s;
     }
 
-    .gallery img:hover {
-      transform: perspective(600px) rotateY(10deg) scale(1.05);
-    }
-
-    /* Menu Toggle */
+    /* Bear Menu Toggle */
     .menu-toggle {
       position: fixed;
-      bottom: 1em;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
       cursor: pointer;
-      z-index: 10001;
-    }
-
-    .menu-toggle img {
-      width: 80px;
-      filter: brightness(0) invert(1) drop-shadow(0 0 40px #7abaff);
-    }
-
-    .menu-toggle.open::after {
-      content: '★';
-      color: red;
-      position: absolute;
-      font-size: 2rem;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    /* Mobile Menu */
-    .mobile-menu {
-      position: fixed;
-      bottom: -100%;
-      left: 0;
-      width: 100%;
-      background: var(--red);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2em;
-      transition: bottom 0.4s ease-in-out;
-      z-index: 9998;
     }
 
-    .mobile-menu.open {
-      bottom: 0;
+    .menu-toggle img {
+      width: 60px;
+      height: 60px;
+      filter: brightness(0) invert(1) drop-shadow(0 0 40px #7abaff);
     }
 
-    .mobile-menu a {
-      font-size: 1.4rem;
-      margin: 1em 0;
+    .menu-toggle .star {
+      color: red;
+      font-size: 2rem;
+      position: absolute;
+      top: 16px;
+      left: 22px;
+      pointer-events: none;
+    }
+
+    .release-details {
+      background: var(--red);
       color: var(--blue);
-      text-decoration: none;
-      font-weight: 900;
+      padding: 2rem;
+      text-align: center;
+      display: none;
     }
 
-    @media(min-width: 800px) {
-      .menu-toggle img {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-      }
+    .release-details.open {
+      display: block;
+    }
 
-      .menu-toggle.open::after {
-        font-size: 3rem;
-      }
+    .release-details p {
+      max-width: 600px;
+      margin: 1em auto;
+      font-weight: 400;
+    }
+
+    .release-details a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+      display: block;
+      margin-top: 1rem;
     }
   </style>
 </head>
@@ -232,48 +215,45 @@
 
   <!-- Loader -->
   <div class="loader">
-    <div class="loader-text">blush</div>
-    <div class="loader-sub">JUNE 2025</div>
-    <div class="loader-image"></div>
+    <div class="blush">blush</div>
+    <div class="images"></div>
+    <div class="final">
+      <div class="logo">blush</div>
+      <div class="subtext">JUNE 2025</div>
+    </div>
   </div>
 
-  <!-- Header -->
-  <div class="header">blush</div>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="menu">
-    <a href="#">Home</a>
-    <a href="#">Tour</a>
-    <a href="#">Music</a>
-    <a href="#">Contact</a>
-  </div>
+  <!-- Header Logo -->
+  <header>blush</header>
 
   <!-- Menu Toggle -->
-  <div class="menu-toggle" onclick="toggleMenu()" id="toggle">
+  <div class="menu-toggle" onclick="toggleDetails()">
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Bear_of_California_%28black%29.svg" alt="menu bear" />
+    <div class="star">&#9733;</div>
   </div>
 
+  <!-- Release Details Section -->
+  <section class="release-details" id="details">
+    <p>Details to the release will be available soon. Expect a genre-defining blend of Texas pop and experimental visuals.</p>
+    <a href="#">More Info</a>
+  </section>
+
   <!-- Main Content -->
-  <div class="main">
+  <main>
     <h2>KEVIN ABSTRACT</h2>
     <h3>summer 2025</h3>
-    <p><strong>Genre:</strong> Kevin Abstract’s new sonic chapter embraces warmth, nostalgia, and Texas pride. Experience his bold take on pop this season.</p>
+    <p class="genre">Genre: TEXAS POP is the latest sonic blend – bold, regional, and forward-looking. Kevin Abstract captures the intensity of heat and color, turning it into unforgettable sound.</p>
     <div class="gallery">
       <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Promo 1" />
       <img src="https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg" alt="Promo 2" />
     </div>
-  </div>
+  </main>
 
-  <!-- Scripts -->
   <script>
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
-    });
-
-    function toggleMenu() {
-      document.getElementById('menu').classList.toggle('open');
-      document.getElementById('toggle').classList.toggle('open');
+    function toggleDetails() {
+      document.getElementById('details').classList.toggle('open');
     }
   </script>
+
 </body>
 </html>
