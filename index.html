@@ -322,61 +322,65 @@ window.addEventListener('DOMContentLoaded', () => {
   const flicker = document.querySelector('.loader-flicker');
   const header = document.querySelector('.header');
 
-  // Step 1: Wait with initial centered blush
-  setTimeout(() => {
-    loaderText.style.opacity = 0;
-  }, 1200);
-
-  // Step 2: Flicker through images
   const images = [
     'https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg',
     'https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg',
     'https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'
   ];
 
+  // Step 1: Initial red "blush" disappears
   setTimeout(() => {
-    let index = 0;
-    flicker.style.opacity = 1;
+    loaderText.style.opacity = 0;
 
-    const flickerInterval = setInterval(() => {
-      flicker.style.backgroundImage = `url('${images[index]}')`;
-      index++;
-      if (index >= images.length) {
-        clearInterval(flickerInterval);
+    // Step 2: Flicker images
+    setTimeout(() => {
+      let index = 0;
+      flicker.style.opacity = 1;
 
-        // Hide flicker, show blush + JUNE 2025
-        setTimeout(() => {
-          flicker.style.opacity = 0;
-          loaderText.style.opacity = 1;
-          loaderText.style.color = '#3D8BF2'; // blue
-          loaderSub.style.opacity = 1;
+      const flickerInterval = setInterval(() => {
+        flicker.style.backgroundImage = `url('${images[index]}')`;
+        index++;
+        if (index >= images.length) {
+          clearInterval(flickerInterval);
 
-          // Step 3: Delay before scaling
+          // Step 3: Hide flicker, show new blush + JUNE 2025
           setTimeout(() => {
-            // Step 4: Scale and move to top-left
-            loaderText.style.transform = 'scale(0.4) translate(-130%, -130%)';
-            loaderText.style.transition = 'transform 1s ease';
-            loaderSub.style.opacity = 0;
+            flicker.style.opacity = 0;
 
-            // Step 5: Remove loader, show content
+            loaderText.textContent = 'blush';
+            loaderText.style.color = '#3D8BF2'; // blue
+            loaderText.style.letterSpacing = '-0.2em';
+            loaderText.style.opacity = 1;
+
+            loaderSub.style.opacity = 1;
+
+            // Step 4: Transition to top-left logo
             setTimeout(() => {
-              loader.style.opacity = 0;
+              loaderSub.style.opacity = 0;
+              loaderText.style.transformOrigin = 'top left';
+              loaderText.style.transform = 'scale(0.55) translate(-260%, -260%)';
+              loaderText.style.transition = 'transform 1s ease, opacity 1s ease';
+
+              // Step 5: Fade out loader
               setTimeout(() => {
-                loader.remove();
-                document.body.classList.add('loaded');
-              }, 800);
-            }, 1200);
-          }, 1600);
-        }, 600);
-      }
-    }, 250);
-  }, 1600);
+                loader.style.opacity = 0;
+                setTimeout(() => {
+                  loader.remove();
+                  document.body.classList.add('loaded');
+                }, 800);
+              }, 1000);
+            }, 1600);
+          }, 400);
+        }
+      }, 200);
+    }, 100);
+  }, 1200);
 });
 
 function toggleMenu(btn) {
   btn.classList.toggle('open');
   document.querySelector('.mobile-menu').classList.toggle('open');
-    }
+}
   </script>
 </body>
 </html>
