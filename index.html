@@ -74,13 +74,13 @@
       transition: opacity 1s ease;
     }
 
-    .loader-image {
+    .loader-flicker {
       position: absolute;
       width: 100%;
       height: 100%;
       background-size: cover;
       background-position: center;
-      animation: flicker 2s steps(1, end);
+      opacity: 0;
       z-index: 1;
     }
 
@@ -104,14 +104,6 @@
       z-index: 10;
       opacity: 0;
       transition: opacity 1s ease;
-    }
-
-    @keyframes flicker {
-      0%   { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
-      25%  { background-image: url('https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg'); }
-      50%  { background-image: url('https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'); }
-      75%  { background-image: url('https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg'); }
-      100% { background-image: url('https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg'); }
     }
 
     .header {
@@ -143,6 +135,18 @@
 
     body.loaded .main {
       opacity: 1;
+    }
+
+    .genre {
+      text-transform: uppercase;
+      color: var(--black);
+      font-weight: 700;
+      margin-bottom: 0.5em;
+      letter-spacing: -0.05em;
+    }
+
+    .genre-wrapper {
+      margin-bottom: 4rem;
     }
 
     .gallery img {
@@ -183,7 +187,7 @@
       content: '★';
       color: red;
       position: absolute;
-      top: 45%;
+      top: -2%;
       left: 55%;
       font-size: 22px;
       transform: translate(-45%, -55%);
@@ -233,13 +237,6 @@
       display: inline-block;
     }
 
-    .genre {
-      text-transform: uppercase;
-      color: var(--white);
-      font-weight: 700;
-      margin-bottom: 0.5em;
-    }
-
     @media (max-width: 600px) {
       .loader-text {
         font-size: 3.5rem;
@@ -283,35 +280,33 @@
 
   <div class="mobile-menu">
     <div class="mobile-extra-text">
-      <p><strong>No Set Identity.<strong><br>
-The possibilites of Blush are truly limitless, whether that be in ters of rotating members, a changing artistic medium, or an abstract personal brand. These factors allow for a journey that can be defined as it is embarked and traveled on.</p>
-          <p><strong>No Finalized Members.<strong><br>
-Blush is not a fixed group. There are no permanent members. It is a platform for discovering new possibilities through collaboration. The group is ever-changing and can involve anyone who brings value to the vision:
-Musicians, photographers, designers, videographers, models, DJ's, etc.</p>
+      <p><strong>No Set Identity.</strong><br>
+      The possibilities of Blush are truly limitless, whether that be in terms of rotating members, a changing artistic medium, or an abstract personal brand.</p>
+      <p><strong>No Finalized Members.</strong><br>
+      Blush is not a fixed group. There are no permanent members. It is a platform for discovering new possibilities through collaboration.</p>
     </div>
   </div>
 
   <div class="main">
-    <div class="genre">GENRE: TEXAS POP</div>
-    <div class="genre">JUNE 2025</div>
+    <div class="genre-wrapper">
+      <div class="genre">BLUSH</div>
+      <div class="genre">KEVIN ABSTRACT</div>
+      <div class="genre">SUMMER</div>
+      <div class="genre">GENRE: TEXAS POP</div>
+    </div>
 
     <div class="gallery">
       <img src="https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg" alt="Visual 1">
-
-
       <img src="https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg" alt="Visual 2">
-
-
       <img src="https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg" alt="Visual 3">
-
       <img src="https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg" alt="Visual 4">
-
       <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Visual 5">
     </div>
-                <p><span class="blush-logo">blush </span> brings focus back to the product and the music.</p>
-              <p><span class="blush-logo">blush </span> disrupts.</p>
-                    <p><span class="blush-logo">blush </span> challenges the norm.</p>
-      <p>This is our chance to build something that will last.</p>
+
+    <p><span class="blush-logo">blush </span> brings focus back to the product and the music.</p>
+    <p><span class="blush-logo">blush </span> disrupts.</p>
+    <p><span class="blush-logo">blush </span> challenges the norm.</p>
+    <p>This is our chance to build something that will last.</p>
   </div>
 
   <script>
@@ -320,19 +315,18 @@ window.addEventListener('DOMContentLoaded', () => {
   const loaderText = document.querySelector('.loader-text');
   const loaderSub = document.querySelector('.loader-sub');
   const flicker = document.querySelector('.loader-flicker');
-  const header = document.querySelector('.header');
 
   const images = [
     'https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg',
     'https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg',
-    'https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'
+    'https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg',
+    'https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg',
+    'https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg'
   ];
 
-  // Step 1: Initial red "blush" disappears
   setTimeout(() => {
     loaderText.style.opacity = 0;
 
-    // Step 2: Flicker images
     setTimeout(() => {
       let index = 0;
       flicker.style.opacity = 1;
@@ -343,25 +337,18 @@ window.addEventListener('DOMContentLoaded', () => {
         if (index >= images.length) {
           clearInterval(flickerInterval);
 
-          // Step 3: Hide flicker, show new blush + JUNE 2025
           setTimeout(() => {
             flicker.style.opacity = 0;
-
             loaderText.textContent = 'blush';
-            loaderText.style.color = '#3D8BF2'; // blue
-            loaderText.style.letterSpacing = '-0.2em';
+            loaderText.style.color = '#3D8BF2';
             loaderText.style.opacity = 1;
-
             loaderSub.style.opacity = 1;
 
-            // Step 4: Transition to top-left logo
             setTimeout(() => {
               loaderSub.style.opacity = 0;
               loaderText.style.transformOrigin = 'top left';
               loaderText.style.transform = 'scale(0.55) translate(-260%, -260%)';
-              loaderText.style.transition = 'transform 1s ease, opacity 1s ease';
 
-              // Step 5: Fade out loader
               setTimeout(() => {
                 loader.style.opacity = 0;
                 setTimeout(() => {
