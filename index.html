@@ -195,8 +195,8 @@
       left: 0;
       width: 100%;
       background: var(--red);
-      color: var(--white);
-      font-weight: 700;
+      color: var(--black);
+      font-weight: 600;
       letter-spacing: -0.15em;
       display: flex;
       flex-direction: column;
@@ -215,8 +215,8 @@
     .mobile-extra-text {
       max-width: 600px;
       text-align: center;
-      color: var(--white);
-      font-weight: 700;
+      color: var(--black);
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: -0.15em;
     }
@@ -250,7 +250,7 @@
       }
 
       .header {
-        font-size: 1.6rem;
+        font-size: 2.2rem;
       }
 
       .gallery img {
@@ -270,9 +270,9 @@
 </head>
 <body>
   <div class="loader">
-    <div class="loader-image"></div>
     <div class="loader-text">blush</div>
     <div class="loader-sub">June 2025</div>
+    <div class="loader-flicker"></div>
   </div>
 
   <div class="header">blush</div>
@@ -308,37 +308,74 @@ Musicians, photographers, designers, videographers, models, DJ's, etc.</p>
 
       <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Visual 5">
     </div>
-                <p><span class="blush-logo">blush</span> brings focus back to the product and the music.</p>
-              <p><span class="blush-logo">blush</span> disrupts.</p>
-                    <p><span class="blush-logo">blush</span> challenges the norm.</p>
+                <p><span class="blush-logo">blush </span> brings focus back to the product and the music.</p>
+              <p><span class="blush-logo">blush </span> disrupts.</p>
+                    <p><span class="blush-logo">blush </span> challenges the norm.</p>
       <p>This is our chance to build something that will last.</p>
   </div>
 
   <script>
-    window.addEventListener('load', () => {
-      const loader = document.querySelector('.loader');
-      const loaderText = document.querySelector('.loader-text');
-      const loaderSub = document.querySelector('.loader-sub');
-      const loaderImage = document.querySelector('.loader-image');
+window.addEventListener('DOMContentLoaded', () => {
+  const loader = document.querySelector('.loader');
+  const loaderText = document.querySelector('.loader-text');
+  const loaderSub = document.querySelector('.loader-sub');
+  const flicker = document.querySelector('.loader-flicker');
+  const header = document.querySelector('.header');
 
-      // Trigger flicker, then scale and fade
-      setTimeout(() => {
-        loaderImage.style.display = 'none';
-        loaderText.style.transform = 'scale(0.4) translate(-130%, -130%)';
-        loaderSub.style.opacity = '1';
+  // Step 1: Wait with initial centered blush
+  setTimeout(() => {
+    loaderText.style.opacity = 0;
+  }, 1200);
 
-        document.body.classList.add('loaded');
+  // Step 2: Flicker through images
+  const images = [
+    'https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg',
+    'https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg',
+    'https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'
+  ];
 
+  setTimeout(() => {
+    let index = 0;
+    flicker.style.opacity = 1;
+
+    const flickerInterval = setInterval(() => {
+      flicker.style.backgroundImage = `url('${images[index]}')`;
+      index++;
+      if (index >= images.length) {
+        clearInterval(flickerInterval);
+
+        // Hide flicker, show blush + JUNE 2025
         setTimeout(() => {
-          loader.style.opacity = '0';
-          loader.style.pointerEvents = 'none';
-        }, 1000);
-      }, 2400);
-    });
+          flicker.style.opacity = 0;
+          loaderText.style.opacity = 1;
+          loaderText.style.color = '#3D8BF2'; // blue
+          loaderSub.style.opacity = 1;
 
-    function toggleMenu(button) {
-      button.classList.toggle('open');
-      document.querySelector('.mobile-menu').classList.toggle('open');
+          // Step 3: Delay before scaling
+          setTimeout(() => {
+            // Step 4: Scale and move to top-left
+            loaderText.style.transform = 'scale(0.4) translate(-130%, -130%)';
+            loaderText.style.transition = 'transform 1s ease';
+            loaderSub.style.opacity = 0;
+
+            // Step 5: Remove loader, show content
+            setTimeout(() => {
+              loader.style.opacity = 0;
+              setTimeout(() => {
+                loader.remove();
+                document.body.classList.add('loaded');
+              }, 800);
+            }, 1200);
+          }, 1600);
+        }, 600);
+      }
+    }, 250);
+  }, 1600);
+});
+
+function toggleMenu(btn) {
+  btn.classList.toggle('open');
+  document.querySelector('.mobile-menu').classList.toggle('open');
     }
   </script>
 </body>
