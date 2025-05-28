@@ -12,6 +12,7 @@
   <meta name="description" content="BLUSH by Kevin Abstract – Texas Pop for the summer. Explore music, visuals, and more." />
   <link rel="icon" href="Favicon.jpg" type="image/jpeg" />
 <link rel="apple-touch-icon" href="FAA91DFD-A3F8-4EE0-9A40-B3E161E4EC37.png" />
+<meta name="twitter:image" content="twitter-card-image.jpg" />
   <style>
     :root {
       --blue: #3D8BF2;
@@ -161,7 +162,7 @@
       position: fixed;
       top: 1rem;
       right: 1rem;
-      z-index: 10001;
+      z-index: 1000;
       cursor: pointer;
     }
 
@@ -174,7 +175,7 @@
       content: '★';
       color: red;
       position: absolute;
-      top: -44%;
+      top: 44%;
       left: 55%;
       font-size: 22px;
       transform: translate(-44%, -55%);
@@ -352,6 +353,7 @@ function toggleMenu(btn) {
   btn.classList.toggle('open');
   document.querySelector('.mobile-menu').classList.toggle('open');
 }
+
 function handleScrollPerspective() {
   const images = document.querySelectorAll('.gallery img');
   const viewportHeight = window.innerHeight;
