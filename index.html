@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>blush</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <!-- Load Inter with weight 900 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
 
   <!-- Meta Description and SEO -->
   <meta name="description" content="BLUSH by Kevin Abstract – Texas Pop for the summer. Explore music, visuals, and more." />
@@ -41,7 +42,7 @@
     body, html {
       background: var(--red);
       font-family: 'Inter', sans-serif;
-      color: var(--white);
+      color: var(--black);
       overflow-x: hidden;
       height: 100%;
     }
@@ -62,7 +63,6 @@
       color: var(--black);
     }
 
-    /* Loader */
     .loader {
       position: fixed;
       top: 0; left: 0;
@@ -74,6 +74,7 @@
       flex-direction: column;
       z-index: 9999;
       user-select: none;
+      transition: opacity 0.6s ease;
     }
 
     .loader-image {
@@ -85,13 +86,12 @@
       background-position: center;
       animation: flicker 2s steps(1, end) infinite;
       z-index: 1;
-      opacity: 0; /* start hidden */
+      opacity: 0;
       transition: opacity 0.3s ease;
     }
 
     .loader-text {
       position: relative;
-      font-family: 'Inter', sans-serif;
       font-weight: 900;
       font-size: 5rem;
       letter-spacing: -0.2em;
@@ -105,7 +105,6 @@
 
     .loader-sub {
       position: relative;
-      font-family: 'Inter', sans-serif;
       font-weight: 700;
       font-size: 1.8rem;
       color: var(--white);
@@ -130,12 +129,10 @@
       100% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
     }
 
-    /* Header (small logo in top-left) */
     .header {
       position: fixed;
       top: 1rem;
       left: 1rem;
-      font-family: 'Inter', sans-serif;
       font-weight: 900;
       font-size: 2rem;
       letter-spacing: -0.2em;
@@ -152,7 +149,6 @@
       pointer-events: auto;
     }
 
-    /* Main content */
     .main {
       padding-top: 6rem;
       opacity: 0;
@@ -161,7 +157,6 @@
       color: var(--black);
       max-width: 900px;
       margin: 0 auto 4rem;
-      font-family: 'Inter', sans-serif;
       letter-spacing: -0.15em;
     }
 
@@ -169,7 +164,6 @@
       opacity: 1;
     }
 
-    /* Gallery images with polaroid style */
     .gallery img {
       width: 85%;
       max-width: 320px;
@@ -186,7 +180,6 @@
       transition: transform 0.4s ease;
     }
 
-    /* Even images tilt left, odd tilt right */
     .gallery img:nth-child(odd):hover {
       transform: perspective(600px) rotateY(10deg) scale(1.05);
     }
@@ -195,7 +188,6 @@
       transform: perspective(600px) rotateY(-10deg) scale(1.05);
     }
 
-    /* Menu toggle - bear */
     .menu-toggle {
       position: fixed;
       top: 1rem;
@@ -205,7 +197,6 @@
       user-select: none;
     }
 
-    /* Hide menu toggle while loader active */
     body:not(.loaded) .menu-toggle {
       display: none;
     }
@@ -214,10 +205,8 @@
       width: 75px;
       filter: brightness(0) invert(1);
       display: block;
-      position: relative;
     }
 
-    /* Star on toggle when open */
     .menu-toggle.open::after {
       content: '★';
       color: red;
@@ -227,10 +216,8 @@
       font-size: 25px;
       transform: translate(-50%, -50%);
       pointer-events: none;
-      user-select: none;
     }
 
-    /* Mobile Menu */
     .mobile-menu {
       position: fixed;
       bottom: -100%;
@@ -261,10 +248,8 @@
       color: var(--white);
       text-transform: uppercase;
       text-decoration: none;
-      user-select: none;
     }
 
-    /* Extra text moved to mobile menu */
     .mobile-extra-text {
       max-width: 600px;
       margin-top: 1em;
@@ -273,27 +258,21 @@
       text-transform: uppercase;
       letter-spacing: -0.15em;
       line-height: 1.4;
-      font-family: 'Inter', sans-serif;
       text-align: center;
     }
 
     .mobile-extra-text p {
       margin-bottom: 1.2em;
-      color: var(--white);
     }
 
-    /* Blush text style in paragraph */
     .blush-logo {
-      font-family: 'Inter', sans-serif;
       font-weight: 900;
       font-size: 2rem;
       letter-spacing: -0.2em;
       color: var(--blue);
       display: inline-block;
-      user-select: none;
     }
 
-    /* Genre text style uppercase white */
     .genre {
       text-transform: uppercase;
       color: var(--white);
@@ -301,7 +280,6 @@
       margin-bottom: 0.5em;
     }
 
-    /* Responsive adjustments */
     @media (max-width: 600px) {
       .loader-text {
         font-size: 3.5rem;
@@ -312,7 +290,7 @@
       }
 
       .header {
-        font-size: 1.4rem;
+        font-size: 2.2rem;
       }
 
       .gallery img {
@@ -370,6 +348,12 @@
 
       <img src="https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg" alt="Visual 3">
       <p><span class="blush-logo">blush</span> – what could it become?</p>
+
+      <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Visual 4">
+      <p><span class="blush-logo">blush</span> – the sound of longing.</p>
+
+      <img src="https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg" alt="Visual 5">
+      <p><span class="blush-logo">blush</span> – this could be your summer.</p>
     </div>
   </div>
 
@@ -379,18 +363,15 @@
       const loaderText = document.querySelector('.loader-text');
       const loaderSub = document.querySelector('.loader-sub');
       const loaderImage = document.querySelector('.loader-image');
-      const header = document.querySelector('.header');
 
       loaderImage.style.opacity = '1';
 
       setTimeout(() => {
         loaderText.style.transform = 'scale(0.6) translate(-130%, -130%)';
-        loaderSub.style.opacity = '0';
-        loaderText.style.opacity = '0.6';
-
-        document.body.classList.add('loaded');
+        loaderSub.style.opacity = '1';
 
         setTimeout(() => {
+          document.body.classList.add('loaded');
           loader.style.opacity = '0';
           loader.style.pointerEvents = 'none';
         }, 800);
