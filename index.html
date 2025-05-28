@@ -352,6 +352,48 @@ function toggleMenu(btn) {
   btn.classList.toggle('open');
   document.querySelector('.mobile-menu').classList.toggle('open');
 }
+function handleScrollPerspective() {
+  const images = document.querySelectorAll('.gallery img');
+  const viewportHeight = window.innerHeight;
+
+  images.forEach((img, index) => {
+    const rect = img.getBoundingClientRect();
+    const imgCenter = rect.top + rect.height / 2;
+    const viewportCenter = viewportHeight / 2;
+    const distanceFromCenter = imgCenter - viewportCenter;
+
+    // Normalize distance to range [-1, 1], capped at +/- viewportCenter
+    const maxDistance = viewportCenter;
+    let normalized = distanceFromCenter / maxDistance;
+    normalized = Math.max(-1, Math.min(1, normalized));
+
+    // Calculate rotation angle max +/-10deg
+    const maxAngle = 10;
+    let angle = maxAngle * normalized;
+
+    // Alternate direction for even images
+    if (index % 2 === 1) angle = -angle;
+
+    // Apply perspective and rotation
+    img.style.transform = `perspective(600px) rotateY(${angle}deg) scale(1.05)`;
+  });
+}
+
+// Only activate on mobile viewport width (<=600px)
+function onScroll() {
+  if (window.innerWidth <= 600) {
+    handleScrollPerspective();
+  } else {
+    // Reset transform for desktop
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.style.transform = '';
+    });
+  }
+}
+
+window.addEventListener('scroll', onScroll);
+window.addEventListener('resize', onScroll);
+window.addEventListener('load', onScroll);
   </script>
 </body>
 </html>
