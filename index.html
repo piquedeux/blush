@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>blush</title>
 
-  <!-- Load Inter with weight 900 -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
 
   <!-- Meta Description and SEO -->
@@ -39,12 +39,11 @@
       padding: 0;
     }
 
-    body, html {
-      background: var(--red);
+    html, body {
       font-family: 'Inter', sans-serif;
+      background: var(--red);
       color: var(--black);
       overflow-x: hidden;
-      height: 100%;
     }
 
     h1, h2, h3 {
@@ -60,7 +59,6 @@
       text-transform: lowercase;
       margin: 1em;
       font-size: 1.2rem;
-      color: var(--black);
     }
 
     .loader {
@@ -73,60 +71,47 @@
       justify-content: center;
       flex-direction: column;
       z-index: 9999;
-      user-select: none;
-      transition: opacity 0.6s ease;
+      transition: opacity 1s ease;
     }
 
     .loader-image {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
+      position: absolute;
+      width: 100%;
+      height: 100%;
       background-size: cover;
       background-position: center;
-      animation: flicker 2s steps(1, end) infinite;
+      animation: flicker 2s steps(1, end);
       z-index: 1;
-      opacity: 0;
-      transition: opacity 0.3s ease;
     }
 
     .loader-text {
-      position: relative;
       font-weight: 900;
       font-size: 5rem;
       letter-spacing: -0.2em;
       color: var(--blue);
       z-index: 10;
+      transition: transform 1s ease, opacity 0.5s ease;
       user-select: none;
-      opacity: 1;
-      animation: pulse 2s ease-in-out infinite;
-      transition: transform 1s ease, opacity 1s ease;
     }
 
     .loader-sub {
-      position: relative;
       font-weight: 700;
       font-size: 1.8rem;
       color: var(--white);
       margin-top: 0.5rem;
       letter-spacing: -0.1em;
       text-transform: uppercase;
-      opacity: 0;
       z-index: 10;
-      user-select: none;
-      transition: transform 1s ease, opacity 1s ease;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      opacity: 0;
+      transition: opacity 1s ease;
     }
 
     @keyframes flicker {
-      0% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
-      33% { background-image: url('https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg'); }
-      66% { background-image: url('https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'); }
-      100% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
+      0%   { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
+      25%  { background-image: url('https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg'); }
+      50%  { background-image: url('https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'); }
+      75%  { background-image: url('https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg'); }
+      100% { background-image: url('https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg'); }
     }
 
     .header {
@@ -141,22 +126,18 @@
       opacity: 0;
       transition: opacity 0.5s ease;
       user-select: none;
-      pointer-events: none;
     }
 
     body.loaded .header {
       opacity: 1;
-      pointer-events: auto;
     }
 
     .main {
-      padding-top: 6rem;
       opacity: 0;
       transition: opacity 0.8s ease 0.2s;
-      text-align: center;
-      color: var(--black);
       max-width: 900px;
-      margin: 0 auto 4rem;
+      margin: 6rem auto 4rem;
+      text-align: center;
       letter-spacing: -0.15em;
     }
 
@@ -167,10 +148,7 @@
     .gallery img {
       width: 85%;
       max-width: 320px;
-      margin: 0 0 3rem 0;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto 3rem;
       border: 12px solid var(--white);
       border-bottom-width: 36px;
       border-radius: 4px;
@@ -192,19 +170,13 @@
       position: fixed;
       top: 1rem;
       right: 1rem;
-      cursor: pointer;
       z-index: 10001;
-      user-select: none;
-    }
-
-    body:not(.loaded) .menu-toggle {
-      display: none;
+      cursor: pointer;
     }
 
     .menu-toggle img {
       width: 75px;
       filter: brightness(0) invert(1);
-      display: block;
     }
 
     .menu-toggle.open::after {
@@ -215,7 +187,6 @@
       left: 55%;
       font-size: 25px;
       transform: translate(-50%, -50%);
-      pointer-events: none;
     }
 
     .mobile-menu {
@@ -233,7 +204,6 @@
       padding: 2em 1em;
       transition: bottom 0.4s ease-in-out;
       z-index: 9998;
-      user-select: text;
       overflow-y: auto;
       max-height: 80vh;
     }
@@ -242,23 +212,13 @@
       bottom: 0;
     }
 
-    .mobile-menu a {
-      font-size: 1.4rem;
-      margin: 1em 0;
-      color: var(--white);
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
     .mobile-extra-text {
       max-width: 600px;
-      margin-top: 1em;
+      text-align: center;
       color: var(--white);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: -0.15em;
-      line-height: 1.4;
-      text-align: center;
     }
 
     .mobile-extra-text p {
@@ -290,26 +250,20 @@
       }
 
       .header {
-        font-size: 2.2rem;
+        font-size: 1.6rem;
       }
 
       .gallery img {
         width: 95%;
         max-width: 280px;
-        margin-bottom: 2.5rem;
-      }
-
-      .blush-logo {
-        font-size: 1.6rem;
       }
 
       .main {
         padding: 4rem 1rem 2rem;
-        font-size: 0.95rem;
       }
 
-      .mobile-menu {
-        padding: 1.5em 1em;
+      .blush-logo {
+        font-size: 1.6rem;
       }
     }
   </style>
@@ -324,12 +278,16 @@
   <div class="header">blush</div>
 
   <div class="menu-toggle" onclick="toggleMenu(this)">
-    <img src="https://cdn.glitch.global/06eb2c8a-539b-40f3-8097-7bc1e8e3aa33/bear-icon.png" alt="Menu" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Bear_of_California_%28black%29.svg" alt="Bear Icon" />
   </div>
 
   <div class="mobile-menu">
     <div class="mobile-extra-text">
-      <p>NO FINALIZED MEMBERS. NO SET IDENTITY. A SOUND AND VISUAL STYLE IN FLUX. THE ONLY GOAL IS TO MAKE SOMETHING BEAUTIFUL.</p>
+      <p><strong>No Set Identity.<strong>
+The possibilites of Blush are truly limitless, whether that be in ters of rotating members, a changing artistic medium, or an abstract personal brand. These factors allow for a journey that can be defined as it is embarked and traveled on.</p>
+          <p><strong>No Finalized Members.<strong>
+Blush is not a fixed group. There are no permanent members. It is a platform for discovering new possibilities through collaboration. The group is ever-changing and can involve anyone who brings value to the vision:
+Musicians, photographers, designers, videographers, models, DJ's, etc.</p>
     </div>
   </div>
 
@@ -337,24 +295,23 @@
     <div class="genre">GENRE: TEXAS POP</div>
     <div class="genre">JUNE 2025</div>
 
-    <p><span class="blush-logo">blush</span> is for the dreamers, the misfits, and the ones who want more from Texas. A new vision of southern music and friendship.</p>
-
     <div class="gallery">
       <img src="https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg" alt="Visual 1">
-      <p><span class="blush-logo">blush</span> – eyes wide open.</p>
+
 
       <img src="https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg" alt="Visual 2">
-      <p><span class="blush-logo">blush</span> – moments before it all begins.</p>
+
 
       <img src="https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg" alt="Visual 3">
-      <p><span class="blush-logo">blush</span> – what could it become?</p>
 
-      <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Visual 4">
-      <p><span class="blush-logo">blush</span> – the sound of longing.</p>
+      <img src="https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg" alt="Visual 4">
 
-      <img src="https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg" alt="Visual 5">
-      <p><span class="blush-logo">blush</span> – this could be your summer.</p>
+      <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Visual 5">
     </div>
+                <p><span class="blush-logo">blush</span> brings focus back to the product and the music.</p>
+              <p><span class="blush-logo">blush</span> disrupts.</p>
+                    <p><span class="blush-logo">blush</span> challenges the norm.</p>
+      <p>This is our chance to build something that will last.</p>
   </div>
 
   <script>
@@ -364,18 +321,19 @@
       const loaderSub = document.querySelector('.loader-sub');
       const loaderImage = document.querySelector('.loader-image');
 
-      loaderImage.style.opacity = '1';
-
+      // Trigger flicker, then scale and fade
       setTimeout(() => {
-        loaderText.style.transform = 'scale(0.6) translate(-130%, -130%)';
+        loaderImage.style.display = 'none';
+        loaderText.style.transform = 'scale(0.4) translate(-130%, -130%)';
         loaderSub.style.opacity = '1';
 
+        document.body.classList.add('loaded');
+
         setTimeout(() => {
-          document.body.classList.add('loaded');
           loader.style.opacity = '0';
           loader.style.pointerEvents = 'none';
-        }, 800);
-      }, 2500);
+        }, 1000);
+      }, 2400);
     });
 
     function toggleMenu(button) {
