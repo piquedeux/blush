@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>blush</title>
 
-
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
 
   <!-- Meta Description and SEO -->
@@ -30,6 +29,7 @@
       --blue: #3D8BF2;
       --red: #FF0000;
       --black: #000000;
+      --white: #ffffff;
     }
 
     * {
@@ -41,7 +41,7 @@
     body, html {
       background: var(--red);
       font-family: 'Inter', sans-serif;
-      color: white;
+      color: var(--white);
       overflow-x: hidden;
       height: 100%;
     }
@@ -50,14 +50,16 @@
       color: var(--blue);
       letter-spacing: -0.16em;
       text-align: center;
-      text-transform: uppercase;
+      margin-bottom: 0.5em;
     }
 
     p {
       text-align: center;
       letter-spacing: -0.08em;
+      text-transform: lowercase;
       margin: 1em;
       font-size: 1.2rem;
+      color: var(--black);
     }
 
     /* Loader */
@@ -83,6 +85,8 @@
       background-position: center;
       animation: flicker 2s steps(1, end) infinite;
       z-index: 1;
+      opacity: 0; /* start hidden */
+      transition: opacity 0.3s ease;
     }
 
     .loader-text {
@@ -96,19 +100,22 @@
       user-select: none;
       opacity: 1;
       animation: pulse 2s ease-in-out infinite;
+      transition: transform 1s ease, opacity 1s ease;
     }
 
     .loader-sub {
       position: relative;
       font-family: 'Inter', sans-serif;
-      font-weight: 400;
+      font-weight: 700;
       font-size: 1.8rem;
-      color: white;
+      color: var(--white);
       margin-top: 0.5rem;
       letter-spacing: -0.1em;
+      text-transform: uppercase;
       opacity: 0;
       z-index: 10;
       user-select: none;
+      transition: transform 1s ease, opacity 1s ease;
     }
 
     @keyframes pulse {
@@ -151,10 +158,10 @@
       opacity: 0;
       transition: opacity 0.8s ease 0.2s;
       text-align: center;
-      color: black;
+      color: var(--black);
       max-width: 900px;
       margin: 0 auto 4rem;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       letter-spacing: -0.15em;
     }
 
@@ -162,15 +169,21 @@
       opacity: 1;
     }
 
-    /* Gallery images with alternating perspective hover */
+    /* Gallery images with polaroid style */
     .gallery img {
-      width: 90%;
-      max-width: 400px;
-      margin: 1em auto;
+      width: 85%;
+      max-width: 320px;
+      margin: 0 0 3rem 0;
       display: block;
-      transition: transform 0.4s ease;
+      margin-left: auto;
+      margin-right: auto;
+      border: 12px solid var(--white);
+      border-bottom-width: 36px;
+      border-radius: 4px;
+      background: var(--white);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       cursor: pointer;
-      border-radius: 6px;
+      transition: transform 0.4s ease;
     }
 
     /* Even images tilt left, odd tilt right */
@@ -211,7 +224,7 @@
       position: absolute;
       top: 50%;
       left: 55%;
-      font-size: 25px; /* smaller star */
+      font-size: 25px;
       transform: translate(-50%, -50%);
       pointer-events: none;
       user-select: none;
@@ -224,8 +237,8 @@
       left: 0;
       width: 100%;
       background: var(--red);
-      color: black;
-      font-weight: bold;
+      color: var(--white);
+      font-weight: 700;
       letter-spacing: -0.15em;
       display: flex;
       flex-direction: column;
@@ -234,6 +247,8 @@
       transition: bottom 0.4s ease-in-out;
       z-index: 9998;
       user-select: text;
+      overflow-y: auto;
+      max-height: 80vh;
     }
 
     .mobile-menu.open {
@@ -243,8 +258,28 @@
     .mobile-menu a {
       font-size: 1.4rem;
       margin: 1em 0;
-      color: black;
+      color: var(--white);
+      text-transform: uppercase;
       text-decoration: none;
+      user-select: none;
+    }
+
+    /* Extra text moved to mobile menu */
+    .mobile-extra-text {
+      max-width: 600px;
+      margin-top: 1em;
+      color: var(--white);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.15em;
+      line-height: 1.4;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+    }
+
+    .mobile-extra-text p {
+      margin-bottom: 1.2em;
+      color: var(--white);
     }
 
     /* Blush text style in paragraph */
@@ -258,130 +293,114 @@
       user-select: none;
     }
 
-    /* Extra text under images */
-    .extra-text {
-      max-width: 600px;
-      margin: 2em auto 0;
-      color: black;
+    /* Genre text style uppercase white */
+    .genre {
+      text-transform: uppercase;
+      color: var(--white);
       font-weight: 700;
-      letter-spacing: -0.15em;
-      line-height: 1.4;
-      font-family: 'Inter', sans-serif;
-      text-align: center;
+      margin-bottom: 0.5em;
     }
 
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .loader-text {
+        font-size: 3.5rem;
+      }
+
+      .loader-sub {
+        font-size: 1.2rem;
+      }
+
+      .header {
+        font-size: 1.4rem;
+      }
+
+      .gallery img {
+        width: 95%;
+        max-width: 280px;
+        margin-bottom: 2.5rem;
+      }
+
+      .blush-logo {
+        font-size: 1.6rem;
+      }
+
+      .main {
+        padding: 4rem 1rem 2rem;
+        font-size: 0.95rem;
+      }
+
+      .mobile-menu {
+        padding: 1.5em 1em;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <!-- Loader -->
-  <div class="loader" id="loader">
-    <div class="loader-image" id="loader-image"></div>
-    <div class="loader-text" id="loader-logo">blush</div>
-    <div class="loader-sub" id="loader-sub">JUNE 2025</div>
+  <div class="loader">
+    <div class="loader-image"></div>
+    <div class="loader-text">blush</div>
+    <div class="loader-sub">June 2025</div>
   </div>
 
-  <!-- Small fixed header logo -->
-  <div class="header" id="header-logo">blush</div>
+  <div class="header">blush</div>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="menu">
-    <a href="#">Release</a>
-    <a href="#">Tour</a>
+  <div class="menu-toggle" onclick="toggleMenu(this)">
+    <img src="https://cdn.glitch.global/06eb2c8a-539b-40f3-8097-7bc1e8e3aa33/bear-icon.png" alt="Menu" />
   </div>
 
-  <!-- Menu Toggle -->
-  <div class="menu-toggle" id="toggle" onclick="toggleMenu()">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Bear_of_California_%28black%29.svg" alt="menu bear" />
+  <div class="mobile-menu">
+    <div class="mobile-extra-text">
+      <p>NO FINALIZED MEMBERS. NO SET IDENTITY. A SOUND AND VISUAL STYLE IN FLUX. THE ONLY GOAL IS TO MAKE SOMETHING BEAUTIFUL.</p>
+    </div>
   </div>
 
-  <!-- Main Content -->
-  <main class="main" id="main-content">
-    <h2>KEVIN ABSTRACT</h2>
-    <h3>SUMMER</h3>
-    <p>Genre: TEXAS POP</p>
+  <div class="main">
+    <div class="genre">GENRE: TEXAS POP</div>
+    <div class="genre">JUNE 2025</div>
+
+    <p><span class="blush-logo">blush</span> is for the dreamers, the misfits, and the ones who want more from Texas. A new vision of southern music and friendship.</p>
+
     <div class="gallery">
-      <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Promo 1" />
-      <img src="https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg" alt="Promo 2" />
+      <img src="https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg" alt="Visual 1">
+      <p><span class="blush-logo">blush</span> – eyes wide open.</p>
+
+      <img src="https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg" alt="Visual 2">
+      <p><span class="blush-logo">blush</span> – moments before it all begins.</p>
+
+      <img src="https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg" alt="Visual 3">
+      <p><span class="blush-logo">blush</span> – what could it become?</p>
     </div>
-
-    <div class="extra-text">
-      <p><span class="blush-logo">blush</span> brings focus back to the product and the music. <span class="blush-logo">blush</span> disrupts.</p>
-      <p><span class="blush-logo">blush</span> challenges the nom.</p>
-      <p>This is our chance to build something that will last.</p>
-
-      <p><strong>No Finalized Members.</strong><br/>
-      Blush is not a fixed group. There are no permanent members. It is a platform for discovering new possibilities through collaboration. The group is ever-changing and can involve anyone who brings value to the vision: musicians, photographers, designers, videographers, models, DJs, etc.</p>
-
-      <p><strong>No Set Identity.</strong><br/>
-      The possibilities of Blush are truly limitless, whether that be in terms of rotating members, a changing artistic medium, or an abstract personal brand. These factors allow for a journey that can be defined as it is embarked and traveled on.</p>
-    </div>
-  </main>
+  </div>
 
   <script>
-    const loader = document.getElementById('loader');
-    const loaderImage = document.getElementById('loader-image');
-    const loaderLogo = document.getElementById('loader-logo');
-    const loaderSub = document.getElementById('loader-sub');
-    const headerLogo = document.getElementById('header-logo');
-    const mainContent = document.getElementById('main-content');
+    window.addEventListener('load', () => {
+      const loader = document.querySelector('.loader');
+      const loaderText = document.querySelector('.loader-text');
+      const loaderSub = document.querySelector('.loader-sub');
+      const loaderImage = document.querySelector('.loader-image');
+      const header = document.querySelector('.header');
 
-    function delay(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      loaderImage.style.opacity = '1';
+
+      setTimeout(() => {
+        loaderText.style.transform = 'scale(0.6) translate(-130%, -130%)';
+        loaderSub.style.opacity = '0';
+        loaderText.style.opacity = '0.6';
+
+        document.body.classList.add('loaded');
+
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          loader.style.pointerEvents = 'none';
+        }, 800);
+      }, 2500);
+    });
+
+    function toggleMenu(button) {
+      button.classList.toggle('open');
+      document.querySelector('.mobile-menu').classList.toggle('open');
     }
-
-    async function runLoaderSequence() {
-      // Step 1: Show only logo pulsing on red background, no flicker
-      loaderImage.style.animation = 'none';
-      loaderImage.style.backgroundImage = 'none';
-
-      loaderSub.style.opacity = '0';
-      loaderLogo.style.opacity = '1';
-      loaderLogo.style.animation = 'pulse 2s ease-in-out infinite';
-
-      await delay(1500);
-
-      // Step 2: Start flickering images
-      loaderImage.style.animation = 'flicker 2s steps(1, end) infinite';
-
-      await delay(4000);
-
-      // Step 3: Show "JUNE 2025" under logo
-      loaderSub.style.opacity = '1';
-
-      await delay(3000);
-
-      // Step 4: Scale down and move logo and sub up, then fade out loader
-      loaderLogo.style.transition = 'transform 1s ease, opacity 1s ease';
-      loaderSub.style.transition = 'transform 1s ease, opacity 1s ease';
-
-      loaderLogo.style.transform = 'scale(0.3) translate(-120px, -130px)';
-      loaderSub.style.transform = 'scale(0.3) translate(-120px, -130px)';
-
-      await delay(1000);
-
-      loader.style.transition = 'opacity 1s ease';
-      loader.style.opacity = '0';
-
-      await delay(1000);
-
-      loader.style.display = 'none';
-
-      // Show main content and header logo
-      document.body.classList.add('loaded');
-    }
-
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      const toggle = document.getElementById('toggle');
-      menu.classList.toggle('open');
-      toggle.classList.toggle('open');
-    }
-
-    window.onload = () => {
-      runLoaderSequence();
-    };
   </script>
-
 </body>
 </html>
