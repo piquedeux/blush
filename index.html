@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>blush</title>
 
-  <!-- Google Font: Anton -->
-  <link href="https://fonts.googleapis.com/css2?family=DM-Sans&display=swap" rel="stylesheet">
+  <!-- Google Font: DM Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet" />
 
   <!-- Meta Description and SEO -->
   <meta name="description" content="BLUSH by Kevin Abstract – Texas Pop for the summer. Explore music, visuals, and more." />
@@ -25,7 +25,6 @@
   <meta name="twitter:description" content="Texas Pop for the summer." />
   <meta name="twitter:image" content="FAA91DFD-A3F8-4EE0-9A40-B3E161E4EC37.png" />
 
-  <!-- Styles -->
   <style>
     :root {
       --blue: #3D8BF2;
@@ -43,6 +42,7 @@
       font-family: 'DM Sans', sans-serif;
       color: white;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
     h1, h2, h3 {
@@ -56,127 +56,156 @@
       letter-spacing: -0.08em;
       margin: 1em;
       font-size: 1.2rem;
+      color: black;
     }
 
-    /* Loader */
+    /* Loader container */
     .loader {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
       background: var(--red);
       display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       z-index: 9999;
-      animation: fadeOut 3.5s ease-out 4s forwards;
+      overflow: hidden;
     }
 
-    .loader-image {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      animation: flicker 2s steps(1, end) infinite;
-    }
-
-    .loader-text {
-      z-index: 10;
-      font-size: 4rem;
-      top: 30%;
+    /* Initial logo pulse */
+    .loader-logo {
       font-weight: 900;
+      font-size: 6rem;
       letter-spacing: -0.2em;
       color: var(--blue);
+      animation: pulse 2s infinite;
+      user-select: none;
     }
 
-    .loader-sub {
-      font-size: 1.5rem;
+    /* Flickering images container, hidden initially */
+    .loader-images {
+      width: 100%;
+      height: 60vh;
+      background-size: cover;
+      background-position: center;
+      animation: flickerImages 4s steps(1, end) forwards;
+      display: none;
+      margin: 2rem 0;
+    }
+
+    /* June 2025 flicker text, hidden initially */
+    .loader-june {
+      font-weight: 700;
+      font-size: 2rem;
       color: white;
-      z-index: 10;
+      letter-spacing: 0;
+      animation: flickerJune 3s steps(1, end) forwards;
+      display: none;
+      margin-top: 1rem;
+      user-select: none;
     }
 
-    @keyframes flicker {
-      10% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
+    /* Final scaled logo */
+    .loader-logo-small {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: -0.2em;
+      color: var(--blue);
+      transform-origin: left top;
+      opacity: 0;
+      user-select: none;
+      transition: opacity 0.8s ease;
+      z-index: 1000;
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes flickerImages {
+      0% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
       25% { background-image: url('https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg'); }
       50% { background-image: url('https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'); }
       75% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
+      100% { background-image: url('https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg'); }
     }
 
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
+    @keyframes flickerJune {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
-    /* Header */
+    /* Header is hidden on load, replaced by final logo */
     .header {
-      font-size: 5rem;
-      letter-spacing: -0.2em;
-      position: fixed;
-      top: 40%;
-      left: 50%;
-      font-weight: 900;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      color: var(--blue);
-      transition: all 1s ease 4s;
+      display: none;
     }
 
-    body.loaded .header {
-      top: 1rem;
-      left: 1rem;
-      font-size: 2rem;
-      transform: none;
-    }
-
-    /* Main content */
+    /* Main content hidden initially */
     .main {
       padding-top: 6rem;
       opacity: 0;
-      animation: fadeIn 1s ease-in 4.2s forwards;
       text-align: center;
+      transition: opacity 1s ease-in;
+      max-width: 700px;
+      margin: 0 auto;
+      color: black;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
+    /* Gallery images with alternating perspective on hover */
     .gallery img {
       width: 90%;
       max-width: 400px;
       margin: 1em auto;
       display: block;
-      transition: transform 0.4s;
+      transition: transform 0.4s ease;
+      cursor: pointer;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
-
-    .gallery img:hover {
+    .gallery img:nth-child(odd):hover {
+      transform: perspective(600px) rotateY(-10deg) scale(1.05);
+    }
+    .gallery img:nth-child(even):hover {
       transform: perspective(600px) rotateY(10deg) scale(1.05);
     }
 
+    /* Menu toggle fixed top right */
     .menu-toggle {
       position: fixed;
-      bottom: 1em;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 1rem;
+      right: 1rem;
       cursor: pointer;
       z-index: 10001;
+      width: 75px;
+      height: 75px;
     }
 
     .menu-toggle img {
-      width: 75px;
+      width: 100%;
+      height: 100%;
       filter: brightness(0) invert(1);
-      animation: wander 2s infinite alternate ease-in-out;
+      transition: filter 0.3s ease;
+      user-select: none;
+      display: block;
+      position: relative;
     }
 
+    /* Star inside bear */
     .menu-toggle.open::after {
       content: '★';
       color: red;
       position: absolute;
-      top: 0;
-      left: 0;
-      font-size: 36px;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-    }
-
-    @keyframes wander {
-      0% { transform: translateX(-50%) translateY(0); }
-      100% { transform: translateX(-40%) translateY(0); }
+      font-size: 36px;
+      pointer-events: none;
+      user-select: none;
     }
 
     /* Mobile Menu */
@@ -186,13 +215,19 @@
       left: 0;
       width: 100%;
       background: var(--red);
-      color: white;
+      color: black;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 2em;
+      letter-spacing: -0.1em;
+      font-weight: 700;
       transition: bottom 0.4s ease-in-out;
       z-index: 9998;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      user-select: none;
     }
 
     .mobile-menu.open {
@@ -202,39 +237,65 @@
     .mobile-menu a {
       font-size: 1.4rem;
       margin: 1em 0;
-      letter-spacing: -0.15;
       color: black;
       text-decoration: none;
+      font-weight: 700;
     }
 
-    @media(min-width: 800px) {
-      .menu-toggle img {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-      }
-
-      .menu-toggle.open::after {
-        font-size: 3rem;
-      }
+    /* Additional descriptive text below gallery */
+    .description {
+      max-width: 600px;
+      margin: 2rem auto;
+      font-weight: 700;
+      letter-spacing: -0.1em;
+      color: black;
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      line-height: 1.5;
     }
+    /* Special "blush" style used in descriptive text */
+    .description .blush-logo {
+      font-weight: 900;
+      font-size: 2.5rem;
+      letter-spacing: -0.2em;
+      color: var(--blue);
+      user-select: none;
+      display: inline-block;
+      margin: 0 0.2em;
+    }
+
+    /* Fade in main content once loader done */
+    body.loaded .main {
+      opacity: 1;
+    }
+
   </style>
 </head>
 <body>
 
   <!-- Loader -->
-  <div class="loader">
-    <div class="loader-text">blush</div>
-    <div class="loader-image"></div>
+  <div class="loader" id="loader">
+    <!-- Step 1: Pulsing logo -->
+    <div class="loader-logo" id="loaderLogo">blush</div>
+
+    <!-- Step 2: Flickering images -->
+    <div class="loader-images" id="loaderImages"></div>
+
+    <!-- Step 3: June 2025 flicker -->
+    <div class="loader-june" id="loaderJune">JUNE 2025</div>
   </div>
 
-  <!-- Header -->
-  <div class="header">blush</div>
+  <!-- Final small logo after loader -->
+  <div class="loader-logo-small" id="smallLogo">blush</div>
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="menu">
-    <a href="#">Release</a>
-    <a href="#">Tour</a>
+    <div><strong>No Finalized Members.</strong></div>
+    <div>Blush is not a fixed group. There are no permanent members. It is a platform for discovering new possibilities through collaboration. The group is ever-changing and can involve anyone who brings value to the vision:</div>
+    <div>Musicians, photographers, designers, videographers, models, DJ's, etc.</div>
+    <div><strong>No Set Identity.</strong></div>
+    <div>The possibilities of Blush are truly limitless, whether that be in terms of rotating members, a changing artistic medium, or an abstract personal brand. These factors allow for a journey that can be defined as it is embarked and traveled on.</div>
+    <a href="#" onclick="toggleMenu()">Close</a>
   </div>
 
   <!-- Menu Toggle -->
@@ -243,7 +304,7 @@
   </div>
 
   <!-- Main Content -->
-  <div class="main">
+  <div class="main" id="mainContent" aria-live="polite">
     <h2>KEVIN ABSTRACT</h2>
     <h3>SUMMER</h3>
     <p>Genre: TEXAS POP</p>
@@ -251,18 +312,105 @@
       <img src="https://pbs.twimg.com/media/Gr0zk2QXkAAWsws.jpg" alt="Promo 1" />
       <img src="https://pbs.twimg.com/media/GrMH-nKWoAEpSzA.jpg" alt="Promo 2" />
     </div>
+
+    <!-- Descriptive Text Below -->
+    <div class="description">
+      <span class="blush-logo">blush</span> brings focus back to the product and the music. <br />
+      <span class="blush-logo">blush</span> disrupts.<br />
+      <span class="blush-logo">blush</span> challenges the norm.<br />
+      This is our chance to build something that will last.
+    </div>
   </div>
 
-  <!-- Scripts -->
   <script>
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
-    });
+    // Elements
+    const loader = document.getElementById('loader');
+    const loaderLogo = document.getElementById('loaderLogo');
+    const loaderImages = document.getElementById('loaderImages');
+    const loaderJune = document.getElementById('loaderJune');
+    const smallLogo = document.getElementById('smallLogo');
+    const mainContent = document.getElementById('mainContent');
+    const body = document.body;
+
+    // Image URLs for flickering
+    const flickerImages = [
+      'https://pbs.twimg.com/media/Gr-0nQBWUAAWk6a.jpg',
+      'https://pbs.twimg.com/media/Gr1IdIFXIAEj8oI.jpg',
+      'https://pbs.twimg.com/media/Gq9UWSQWcAATCoW.jpg'
+    ];
 
     function toggleMenu() {
-      document.getElementById('menu').classList.toggle('open');
-      document.getElementById('toggle').classList.toggle('open');
+      const menu = document.getElementById('menu');
+      const toggle = document.getElementById('toggle');
+      menu.classList.toggle('open');
+      toggle.classList.toggle('open');
     }
+
+    // Loader animation sequence using async-await + promises for clarity
+    async function runLoaderSequence() {
+      // Step 1: Show pulsing logo only
+      loaderLogo.style.display = 'block';
+      loaderImages.style.display = 'none';
+      loaderJune.style.display = 'none';
+      smallLogo.style.opacity = 0;
+      mainContent.style.opacity = 0;
+
+      await delay(2000); // pulse for 2 seconds
+
+      // Step 2: Flicker images for 4 seconds
+      loaderLogo.style.display = 'none';
+      loaderImages.style.display = 'block';
+
+      // Animate flickerImages manually (step every 1s for 4s)
+      for(let i = 0; i < flickerImages.length * 2; i++) {
+        loaderImages.style.backgroundImage = `url('${flickerImages[i % flickerImages.length]}')`;
+        await delay(1000);
+      }
+
+      // Step 3: Show logo + June 2025 flickering for 3 seconds
+      loaderImages.style.display = 'none';
+      loaderLogo.style.display = 'block';
+      loaderLogo.textContent = 'blush';
+      loaderJune.style.display = 'block';
+
+      // Flicker June 2025 by toggling opacity
+      for(let i=0; i<6; i++) {
+        loaderJune.style.opacity = i % 2 === 0 ? '1' : '0.3';
+        await delay(500);
+      }
+      loaderJune.style.opacity = '1';
+
+      // Step 4: Scale down and move logo to top-left
+      loaderLogo.style.transition = 'transform 1s ease, font-size 1s ease';
+      loaderLogo.style.transformOrigin = 'left top';
+      loaderLogo.style.fontSize = '2rem';
+      loaderLogo.style.position = 'fixed';
+      loaderLogo.style.top = '1rem';
+      loaderLogo.style.left = '1rem';
+      loaderLogo.style.letterSpacing = '-0.2em';
+      loaderLogo.style.color = '#3D8BF2';
+
+      // Animate scale and move using transform scale(0.33) and translate(0,0)
+      loaderLogo.style.transform = 'scale(0.33)';
+
+      await delay(1000);
+
+      // Hide loader and show main content & final small logo
+      loader.style.opacity = '0';
+      loader.style.pointerEvents = 'none';
+
+      smallLogo.style.opacity = '1';
+      body.classList.add('loaded');
+    }
+
+    // Utility delay function
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    window.onload = () => {
+      runLoaderSequence();
+    };
   </script>
 
 </body>
